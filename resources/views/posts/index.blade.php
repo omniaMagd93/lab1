@@ -21,17 +21,22 @@
     </tr>
   </thead>
   <tbody>
+
+    @foreach ($posts as $post)
+
     <tr>
       <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td>{{$post->title}}</td>
+      <td>{{$post->user->name}}</td>
+      <td>{{date('Y-m-d', strtotime($post->created_at))}}</td>
       <td>
         <button type="button" class="btn btn-info">View</button>
         <button type="button" class="btn btn-primary">Edit</button>
         <button type="button" class="btn btn-danger">Delete</button>
       </td>
     </tr>
+
+    @endforeach
     
   </tbody>
 </table>

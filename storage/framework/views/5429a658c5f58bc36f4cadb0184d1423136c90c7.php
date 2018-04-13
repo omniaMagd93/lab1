@@ -19,17 +19,22 @@
     </tr>
   </thead>
   <tbody>
+
+    <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
     <tr>
       <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td><?php echo e($post->title); ?></td>
+      <td><?php echo e($post->user->name); ?></td>
+      <td><?php echo e(date('Y-m-d', strtotime($post->created_at))); ?></td>
       <td>
         <button type="button" class="btn btn-info">View</button>
         <button type="button" class="btn btn-primary">Edit</button>
         <button type="button" class="btn btn-danger">Delete</button>
       </td>
     </tr>
+
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     
   </tbody>
 </table>
