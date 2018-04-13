@@ -3,7 +3,7 @@
 
 <div class="col-md-12 text-center"> 
 
-<button type="button" class="btn btn-success" >Create Post</button>
+<button type="button" class="btn btn-success" onclick="window.location='<?php echo e(url("posts/create")); ?>'">Create Post</button>
 
 </div>
 

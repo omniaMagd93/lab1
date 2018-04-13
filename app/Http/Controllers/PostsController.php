@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\MessageBag;
 use Illuminate\Http\Request;
 
 use App\Post;
@@ -16,5 +17,31 @@ class PostsController extends Controller
     	return view('posts.index',[
     		'posts' => $posts
     	]);
+    }
+
+     public function create()
+    {
+        $users = User::all();
+    	return view('posts.create',[
+           'users' => $users
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+
+        $validatedData = $request->validate([
+        'title' => 'bail|required|unique:posts',
+        'description' => 'required',
+        'user_id' => 'required',
+    ]);
+
+       Post::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $request->user_id
+        ]);
+        
+       return redirect(route('posts.index')); 
     }
 }
