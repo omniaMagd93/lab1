@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\MessageBag;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 use App\Post;
 
@@ -43,5 +44,37 @@ class PostsController extends Controller
         ]);
         
        return redirect(route('posts.index')); 
+    }
+     public function edit(Request $request)
+    {
+       //dd($id);
+        //DB::table('posts')->whereId($id)->first();
+        $post = Post::whereId($request->id)->first();
+
+        $users = User::all();
+
+        return view('posts.edit',[
+            'post' => $post,
+            'users' => $users
+        ]);
+    }
+
+     public function update(Request $request)
+    {
+       dd($request->id);  
+    }
+
+      public function show(Request $request)
+    {
+       //dd($id);
+        //DB::table('posts')->whereId($id)->first();
+        $post = Post::whereId($request->id)->first();
+
+        $users = User::all();
+
+        return view('posts.show',[
+            'post' => $post,
+            'users' => $users
+        ]);
     }
 }

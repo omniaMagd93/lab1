@@ -21,3 +21,8 @@ Route::get('posts/create', 'PostsController@create')->name('posts.create');
 
 Route::post('posts', 'PostsController@store');
 
+Route::get('posts/{id}/edit', 'PostsController@edit')->name('posts.edit');
+
+//Route::get('posts/{id}', 'PostsController@show')->name('posts.show');
+
+//Route::PUT/PATCH('posts/{id}', 'PostsController@update')->name('posts.update');
