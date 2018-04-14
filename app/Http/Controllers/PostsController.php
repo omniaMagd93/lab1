@@ -61,7 +61,15 @@ class PostsController extends Controller
 
      public function update(Request $request)
     {
-       dd($request->id);  
+       //dd($request->title);  
+
+   Post::where('id', $request->id)->update(array(
+            'title'    =>  $request->title,
+            'description' =>  $request->description,
+            'user_id'  => $request->user_id,
+            
+        ));
+   return redirect(route('posts.index')); 
     }
 
       public function show(Request $request)
