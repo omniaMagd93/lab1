@@ -32,7 +32,12 @@
       <td>
         <button type="button" class="btn btn-info" onclick="window.location='{{ url("posts/$post->id") }}'" >View</button>
         <button type="button" class="btn btn-primary"  onclick="window.location='{{ url("posts/$post->id/edit") }}'" >Edit</button>
-        <button type="button" class="btn btn-danger">Delete</button>
+        <form action="posts/delete" method="post">
+          {{csrf_field()}}
+{{ method_field('Delete') }}
+<button onclick="return confirm('Are You Sure ?')" type="button" class="btn btn-danger">Delete</button>
+</form>
+        
       </td>
     </tr>
 

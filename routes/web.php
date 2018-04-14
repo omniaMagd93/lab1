@@ -27,4 +27,4 @@ Route::get('posts/{id}', 'PostsController@show')->name('posts.show');
 
 Route::post('posts/{id}', 'PostsController@update')->name('posts.update');
 
-//Route::post('posts/delete', 'PostsController@delete')->name('posts.delete');
+Route::delete('posts/delete', 'PostsController@delete')->name('posts.delete');

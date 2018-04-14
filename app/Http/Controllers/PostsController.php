@@ -10,6 +10,12 @@ use App\Post;
 
 use App\User;
 
+use App\Http\Requests\PostsStoreRequest;
+
+use App\Http\Requests\PostsUpdateRequest;
+
+
+
 class PostsController extends Controller
 {
     public function index()
@@ -28,21 +34,8 @@ class PostsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(PostsStoreRequest $request)
     {
-
-        $validatedData = $request->validate([
-        'title' => 'required|unique:posts|min:6|max:20',
-        'description' => 'required',
-        'user_id' => 'required',
-    ],[
-          'title.required' => "Title is required",
-          'title.unique' => "title must be unique",
-          'title.min' => "please insert 6 characters at least",
-          'description.required' => "Description is required",
-
-
-    ]);
 
        Post::create([
             'title' => $request->title,
@@ -52,10 +45,9 @@ class PostsController extends Controller
         
        return redirect(route('posts.index')); 
     }
-     public function edit(Request $request)
+     public function edit(request $request)
     {
-       //dd($id);
-        //DB::table('posts')->whereId($id)->first();
+       
         $post = Post::whereId($request->id)->first();
 
         $users = User::all();
@@ -66,9 +58,9 @@ class PostsController extends Controller
         ]);
     }
 
-     public function update(Request $request)
+     public function update(PostsUpdateForm $request)
     {
-       //dd($request->title);  
+         
 
    Post::where('id', $request->id)->update(array(
             'title'    =>  $request->title,
