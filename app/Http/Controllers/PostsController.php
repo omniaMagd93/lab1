@@ -32,9 +32,16 @@ class PostsController extends Controller
     {
 
         $validatedData = $request->validate([
-        'title' => 'bail|required|unique:posts',
+        'title' => 'required|unique:posts|min:6|max:20',
         'description' => 'required',
         'user_id' => 'required',
+    ],[
+          'title.required' => "Title is required",
+          'title.unique' => "title must be unique",
+          'title.min' => "please insert 6 characters at least",
+          'description.required' => "Description is required",
+
+
     ]);
 
        Post::create([

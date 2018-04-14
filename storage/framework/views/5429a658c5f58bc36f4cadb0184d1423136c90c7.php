@@ -28,7 +28,7 @@
       <td><?php echo e($post->user->name); ?></td>
       <td><?php echo e(date('Y-m-d', strtotime($post->created_at))); ?></td>
       <td>
-        <button type="button" class="btn btn-info">View</button>
+        <button type="button" class="btn btn-info" onclick="window.location='<?php echo e(url("posts/$post->id")); ?>'" >View</button>
         <button type="button" class="btn btn-primary"  onclick="window.location='<?php echo e(url("posts/$post->id/edit")); ?>'" >Edit</button>
         <button type="button" class="btn btn-danger">Delete</button>
       </td>

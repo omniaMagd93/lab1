@@ -1,4 +1,7 @@
-<?php $__env->startSection('content'); ?>
+
+@extends('layouts.master')
+
+@section('content')
 
 <div class ="container-fluid" >
  <form >
@@ -8,12 +11,12 @@
 
     	<tr>
     <td>Title:</td>
-    <td> <?php echo e($post->title); ?></td>
+    <td> {{$post->title}}</td>
         </tr>
 
         <tr>
         	<td>Description:</td>
-        	<td><?php echo e($post->description); ?></td>
+        	<td>{{$post->description}}</td>
         </tr>
 
         
@@ -31,16 +34,16 @@
 
         <tr>
     <td>Name:</td>
-    <td> <?php echo e($post->user->name); ?></td>
+    <td> {{$post->user->name}}</td>
         </tr>
   
         <tr>
             <td>Email:</td>
-            <td><?php echo e($post->user->email); ?></td>
+            <td>{{$post->user->email}}</td>
         </tr>
          <tr>
             <td>Date:</td>
-            <td><?php echo e($post->created_at); ?></td>
+            <td>{{$post->created_at}}</td>
         </tr>
 
         
@@ -50,5 +53,4 @@
 
 </div>
 
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@endsection
