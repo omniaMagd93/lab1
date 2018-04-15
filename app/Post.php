@@ -2,21 +2,45 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class Post extends Model
 {
+
+      use Sluggable;
+
     //
        protected $fillable = [
     	'title',
     	'description',
     	'user_id',
-        'created_at'
     ];
 
          public function user()
     {
         //User::class == 'App\User'
         return $this->belongsTo(User::class);
+    }
+
+     public function getCreatDateAttribute()
+    {
+        $dt = new Carbon($this->created_at);
+        return "{$dt->format('l jS \\of F Y h:i:s A')}";
+        
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }

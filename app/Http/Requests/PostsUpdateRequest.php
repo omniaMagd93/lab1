@@ -25,8 +25,9 @@ class PostsUpdateRequest extends FormRequest
     {
         return [
             //
-            'title' => 'required|unique('posts')->ignore($id)|min:3',
+            'title' => 'required|unique:posts,id|min:3',
             'description' => 'required|min:10',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 }

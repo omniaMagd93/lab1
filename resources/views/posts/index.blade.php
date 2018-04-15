@@ -17,34 +17,46 @@
       <th scope="col">Title</th>
       <th scope="col">Posted By</th>
       <th scope="col">Created At</th>
+      <th scope="col">Slug</th>
       <th scope="col">Actions</th>
+
     </tr>
   </thead>
   <tbody>
 
     @foreach ($posts as $post)
-
+    
     <tr>
       <th scope="row">1</th>
       <td>{{$post->title}}</td>
       <td>{{$post->user->name}}</td>
       <td>{{date('Y-m-d', strtotime($post->created_at))}}</td>
+     <td>{{$post->slug}}</td>
       <td>
         <button type="button" class="btn btn-info" onclick="window.location='{{ url("posts/$post->id") }}'" >View</button>
         <button type="button" class="btn btn-primary"  onclick="window.location='{{ url("posts/$post->id/edit") }}'" >Edit</button>
-        <form action="posts/delete" method="post">
+        <form action="/posts/{{$post->id}}" method="post">
           {{csrf_field()}}
-{{ method_field('Delete') }}
-<button onclick="return confirm('Are You Sure ?')" type="button" class="btn btn-danger">Delete</button>
+{{ method_field('DELETE') }}
+<button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure ?');">Delete</button>
 </form>
         
       </td>
+      
     </tr>
 
     @endforeach
     
   </tbody>
 </table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  
+    {{ $posts->links() }}
+    
+  </ul>
+</nav>
+
 
 </div>
 

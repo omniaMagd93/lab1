@@ -43,7 +43,7 @@
         </tr>
          <tr>
             <td>Date:</td>
-            <td>{{$post->created_at}}</td>
+            <td>{{$post->creat_date}}</td>
         </tr>
 
         

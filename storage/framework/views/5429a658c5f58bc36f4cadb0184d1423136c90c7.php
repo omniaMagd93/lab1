@@ -15,36 +15,49 @@
       <th scope="col">Title</th>
       <th scope="col">Posted By</th>
       <th scope="col">Created At</th>
+      <th scope="col">Slug</th>
       <th scope="col">Actions</th>
+
     </tr>
   </thead>
   <tbody>
 
     <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
+    
     <tr>
       <th scope="row">1</th>
       <td><?php echo e($post->title); ?></td>
       <td><?php echo e($post->user->name); ?></td>
       <td><?php echo e(date('Y-m-d', strtotime($post->created_at))); ?></td>
+     <td><?php echo e($post->slug); ?></td>
       <td>
         <button type="button" class="btn btn-info" onclick="window.location='<?php echo e(url("posts/$post->id")); ?>'" >View</button>
         <button type="button" class="btn btn-primary"  onclick="window.location='<?php echo e(url("posts/$post->id/edit")); ?>'" >Edit</button>
-        <form action="posts/delete" method="post">
+        <form action="/posts/<?php echo e($post->id); ?>" method="post">
           <?php echo e(csrf_field()); ?>
 
-<?php echo e(method_field('Delete')); ?>
+<?php echo e(method_field('DELETE')); ?>
 
-<button onclick="return confirm('Are You Sure ?')" type="button" class="btn btn-danger">Delete</button>
+<button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure ?');">Delete</button>
 </form>
         
       </td>
+      
     </tr>
 
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     
   </tbody>
 </table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  
+    <?php echo e($posts->links()); ?>
+
+    
+  </ul>
+</nav>
+
 
 </div>
 

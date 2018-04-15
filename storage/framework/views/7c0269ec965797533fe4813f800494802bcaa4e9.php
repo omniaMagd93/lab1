@@ -40,7 +40,7 @@
         </tr>
          <tr>
             <td>Date:</td>
-            <td><?php echo e($post->created_at); ?></td>
+            <td><?php echo e($post->creat_date); ?></td>
         </tr>
 
         

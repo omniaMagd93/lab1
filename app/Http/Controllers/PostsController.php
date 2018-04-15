@@ -20,7 +20,8 @@ class PostsController extends Controller
 {
     public function index()
     {
-    	$posts = Post::all();
+    	// /$posts = Post::all();
+        $posts = Post::paginate(3);
     	return view('posts.index',[
     		'posts' => $posts
     	]);
@@ -58,7 +59,7 @@ class PostsController extends Controller
         ]);
     }
 
-     public function update(PostsUpdateForm $request)
+     public function update(PostsUpdateRequest $request)
     {
          
 
@@ -68,6 +69,7 @@ class PostsController extends Controller
             'user_id'  => $request->user_id,
             
         ));
+  
    return redirect(route('posts.index')); 
     }
 
@@ -83,5 +85,12 @@ class PostsController extends Controller
             'post' => $post,
             'users' => $users
         ]);
+    }
+
+    public function delete($id)
+    {
+        
+         Post::find($id)->delete();
+         return redirect(route('posts.index')); 
     }
 }

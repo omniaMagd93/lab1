@@ -15,16 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('posts','PostsController@index')->name('posts.index');
+Route::get('posts','PostsController@index')->name('posts.index')->middleware('auth');
 
-Route::get('posts/create', 'PostsController@create')->name('posts.create');
+Route::get('posts/create', 'PostsController@create')->name('posts.create')->middleware('auth');
 
-Route::post('posts', 'PostsController@store');
+Route::post('posts', 'PostsController@store')->middleware('auth');
 
-Route::get('posts/{id}/edit', 'PostsController@edit')->name('posts.edit');
+Route::get('posts/{id}/edit', 'PostsController@edit')->name('posts.edit')->middleware('auth');
 
-Route::get('posts/{id}', 'PostsController@show')->name('posts.show');
+Route::get('posts/{id}', 'PostsController@show')->name('posts.show')->middleware('auth');
 
-Route::post('posts/{id}', 'PostsController@update')->name('posts.update');
+Route::post('posts/{id}', 'PostsController@update')->name('posts.update')->middleware('auth');
 
-Route::delete('posts/delete', 'PostsController@delete')->name('posts.delete');
+Route::delete('posts/{id}', 'PostsController@delete')->name('posts.delete')->middleware('auth');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
