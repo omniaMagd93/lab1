@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\AllowCreatePosts;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostsStoreRequest extends FormRequest
@@ -24,9 +26,9 @@ class PostsStoreRequest extends FormRequest
     public function rules()
     {
         return [
-        'title' => 'required|unique:posts|min:3',
+        'title' => 'required|unique:posts',
         'description' => 'required|min:10',
-        'user_id'=>'required'
+        'user_id'=>['required',new AllowCreatePosts()]
         ];
     }
 }
