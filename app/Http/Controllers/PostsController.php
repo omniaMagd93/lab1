@@ -85,6 +85,8 @@ class PostsController extends Controller
             'post' => $post,
             'users' => $users
         ]);
+
+        
     }
 
     public function delete($id)
