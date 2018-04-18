@@ -61,6 +61,7 @@
                         </div>
                     </form>
                 </div>
+                 <button type="button" class="btn btn-success" onclick="window.location='<?php echo e(url("login/github")); ?>'">Github login</button>
             </div>
         </div>
     </div>

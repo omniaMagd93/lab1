@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Socialite;
+
+use App\UserSocial;
+
 class LoginController extends Controller
 {
     /*
@@ -36,4 +40,46 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('github')->user();
+
+      
+        $UserId = $user->getId();
+        $UsernickName = $user->getNickname();;
+        $UserEmail = $user->getEmail();
+
+        $findId = UserSocial::where('social_id',$user->getId())->exists();
+
+        login($user, true);
+
+        if($findId)
+        {
+           
+       return redirect(route('posts.index'));
+        }
+           
+
+else
+{
+            UserSocial::create([
+            'social_id' => $user->getId(),
+            'social_name' => $UsernickName,
+            'social_email' => $UserEmail,
+            'social_flag' => "github",
+
+
+            
+        ]);
+ 
+       return redirect(route('posts.index'));
+    
+}
+}
 }

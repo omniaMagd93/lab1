@@ -41,11 +41,26 @@
   Launch demo modal
 </button>
  <button targ="{{ $post->id }}" class="btn btn-warning" > view Ajax </button>
+      <?php if($post->trashed()){?>
+
+<form action="/posts/restore/{{$post->id}}" method="post">
+          {{csrf_field()}}
+      
+{{ method_field('DELETE') }}
+<button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure ?');">Restore</button>
+</form>
+
+      <?php }else{?>
+
         <form action="/posts/{{$post->id}}" method="post">
           {{csrf_field()}}
+      
 {{ method_field('DELETE') }}
 <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure ?');">Delete</button>
 </form>
+
+<?php } ?>
+
         
       </td>
       

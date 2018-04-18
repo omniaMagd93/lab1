@@ -62,6 +62,7 @@
                         </div>
                     </form>
                 </div>
+                 <button type="button" class="btn btn-success" onclick="window.location='{{ url("login/github") }}'">Github login</button>
             </div>
         </div>
     </div>

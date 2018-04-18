@@ -21,7 +21,7 @@ class PostsController extends Controller
     public function index()
     {
     	// /$posts = Post::all();
-        $posts = Post::paginate(3);
+        $posts = Post::withTrashed()->paginate(3);
     	return view('posts.index',[
     		'posts' => $posts
     	]);
@@ -94,5 +94,13 @@ class PostsController extends Controller
         
          Post::find($id)->delete();
          return redirect(route('posts.index')); 
+    }
+
+    public function restore($id)
+    {
+      Post::withTrashed()
+        ->where('id', $id)
+        ->restore();
+      return redirect(route('posts.index'));
     }
 }

@@ -39,13 +39,30 @@
   Launch demo modal
 </button>
  <button targ="<?php echo e($post->id); ?>" class="btn btn-warning" > view Ajax </button>
+      <?php if($post->trashed()){?>
+
+<form action="/posts/restore/<?php echo e($post->id); ?>" method="post">
+          <?php echo e(csrf_field()); ?>
+
+      
+<?php echo e(method_field('DELETE')); ?>
+
+<button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure ?');">Restore</button>
+</form>
+
+      <?php }else{?>
+
         <form action="/posts/<?php echo e($post->id); ?>" method="post">
           <?php echo e(csrf_field()); ?>
 
+      
 <?php echo e(method_field('DELETE')); ?>
 
 <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure ?');">Delete</button>
 </form>
+
+<?php } ?>
+
         
       </td>
       

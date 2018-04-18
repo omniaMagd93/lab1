@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'github' => [
+    'client_id' => env('GITHUB_CLIENT_ID','1dbc6f8ece7704f0d61b'),         // Your GitHub Client ID
+    'client_secret' => env('GITHUB_CLIENT_SECRET','afc4743359ee26459985fc5e418c2c96a9d2a929'), // Your GitHub Client Secret
+    'redirect' => 'http://laraveltest.local/login/github/callback',
+],
+
 ];
